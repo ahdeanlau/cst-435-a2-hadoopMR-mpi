@@ -1,5 +1,7 @@
 # CST435
 
+first, change to this working directory, `mapreduce`
+
 run this command to test result: `python mapper.py daily.csv | python reducer.py`
 
 read this [guide](https://medium.com/@rrfd/your-first-map-reduce-using-hadoop-with-python-and-osx-ca3b6f3dfe78) to know what are these two mapper and reducer doing
