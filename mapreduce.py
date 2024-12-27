@@ -3,7 +3,7 @@ from mrjob.job import MRJob
 class MRMapper(MRJob):
     def mapper(self, _, line):
         # Skip the header
-        if line.startswith("header_column1"):
+        if line.startswith("Date"):
             return
         
         # Parse the line
