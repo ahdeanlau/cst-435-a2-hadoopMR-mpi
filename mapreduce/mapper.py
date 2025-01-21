@@ -3,6 +3,11 @@
 import sys
 import csv
 
+import time
+import logging
+
+start_time = time.time()
+
 # Set local variables
 iteration = 0
 currentCountry = None
@@ -61,3 +66,6 @@ for line in infile:
 # Show the returned values
 for i in sorted(fxMap):
     print("%-20s - %d" % (i[0], i[1]))
+
+end_time = time.time()
+logging.info(f"Map Phase Completed in {end_time - start_time:.4f} seconds")

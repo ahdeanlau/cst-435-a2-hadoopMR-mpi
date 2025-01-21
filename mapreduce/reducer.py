@@ -3,6 +3,11 @@
 import sys
 from collections import defaultdict
 
+import time
+import logging
+
+start_time = time.time()
+
 # Initialize a dictionary to store counts
 counts = defaultdict(int)
 
@@ -21,3 +26,6 @@ for line in sys.stdin:
 # Output the aggregated results
 for key in sorted(counts):
     print(f"{key} = {counts[key]}")
+
+end_time = time.time()
+logging.info(f"Map Phase Completed in {end_time - start_time:.4f} seconds")
