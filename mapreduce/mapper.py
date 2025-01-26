@@ -3,12 +3,7 @@
 import sys
 import csv
 
-import time
-import logging
 
-start_time = time.time()
-
-# Set local variables
 iteration = 0
 currentCountry = None
 previousCountry = None
@@ -18,44 +13,33 @@ percentChange = None
 currentKey = None
 fxMap = []
 
-# Open the input file specified in the command
+
 if len(sys.argv) > 1:
     infile = open(sys.argv[1], "r")
 else:
     infile = sys.stdin
 
-next(infile)  # Skip header
-
+next(infile)  
 for line in infile:
     line = line.strip()
-    line = line.split(',', 2)
+    
+    line = line.split(',')
     try:
-        # Get data from line
-        currentCountry = line[1].rstrip()
-        if len(line[2]) == 0:
-            continue
-        currentFx = float(line[2])
-        
-        if currentCountry != previousCountry:
-            previousCountry = currentCountry
-            previousFx = currentFx
-            previousLine = line
-            continue
 
-        # If country same as previous, add to map
-        elif currentCountry == previousCountry:
-            percentChange = ((currentFx - previousFx) / previousFx) * 100.00
-            percentChange = round(percentChange, 2)
-            currentKey = "%s: %6.2f%%" % (currentCountry, percentChange)
-            # Set the array with tuple keys
-            fxMap.append(tuple([currentKey, 1]))
+        currentCountry = line[0].rstrip()
+        # print(currentCountry)
+        red= line[3].rstrip()
+        green= line[4].rstrip()
+        blue=line[5].rstrip()
+        currentKey=currentCountry+ " ("+red+" , "+green+" , "+blue+ ")"
+        fxMap.append(tuple([currentKey,1]))
 
-        # Update Values
+
         previousCountry = currentCountry
         previousFx = currentFx
         previousLine = line
 
-    # Handle unexpected errors
+
     except Exception as e:
         template = "An exception of type {0} occurred. Arguments:\n{1!r}"
         message = template.format(type(e).__name__, e.args)
@@ -63,9 +47,5 @@ for line in infile:
         print(message)
         sys.exit(0)
 
-# Show the returned values
 for i in sorted(fxMap):
     print("%-20s - %d" % (i[0], i[1]))
-
-end_time = time.time()
-logging.info(f"Map Phase Completed in {end_time - start_time:.4f} seconds")
