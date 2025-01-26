@@ -35,7 +35,6 @@ def mpi_reducer(mapped_data):
 
 def main():
     parser = argparse.ArgumentParser(description='MPI Program')
-    parser.add_argument('filename', type=str, help='The input data file name')
     args = parser.parse_args()
 
     start_time = time.time()
